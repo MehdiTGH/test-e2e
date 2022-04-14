@@ -3,12 +3,14 @@
     "version": "1.0.0",
     "description": "google search testing",
     "main": "",
+    "browser": true,
     "scripts": {
         "git": "git reset --hard origin/master && git fetch origin && git pull origin"
     },
     "author": "mandriao84",
     "license": "ISC",
     "devDependencies": {
-        "cypress": "^9.5.0"
+        "cypress": "^9.5.0",
+        "cypress-file-upload": "^5.0.8"
     }
 }

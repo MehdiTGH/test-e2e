@@ -1,9 +1,26 @@
-describe(`after visiting ["www.welcometothejungle.com/fr/me/settings/account"] webpage, clicking on ["Se connecter"] button, filling ["Email", "Mot de passe"] inputs, clicking ["Se connecter"] button, filling ["Photo de profil"] input and clicking on ["OK"] button`, () => {
+
+import * as loginData from '../../cypress/fixtures/data/data-user.json';
+import * as apiRegistrationData from '../../cypress/fixtures/data/data-api-registration.json';
+import * as uploadData from '../../cypress/fixtures/data/data-upload.json';
+
+describe(`Test Account User informations`, () => {  
   before(() => {
-    cy.visit('fr/me/settings/account')
-    // ...
-  })
-  it("_profile-avatar data are updated", () => {
-    // ....
-  })
-})
+
+    cy.manageCookiesWTTJ();
+    cy.visit(loginData.urlAccount);
+
+  });
+  it(`login for user ${loginData.email}`, () => {
+
+    cy.LoginUserAccount(loginData.email,loginData.password);
+
+  });
+  it(`update avatar :  ${uploadData.urlImage} from account page and check API response : ${apiRegistrationData.urlRequest} : ${apiRegistrationData.method}`, () => {
+
+    cy.interceptRequest(apiRegistrationData.method,apiRegistrationData.urlRequest, apiRegistrationData.nameRequest);
+    cy.uploadFile(uploadData.urlImage);
+    cy.submitFormAccount();
+    cy.waitRequestAndCheckResp(apiRegistrationData.nameRequest,apiRegistrationData.statusCodeWaiting, apiRegistrationData.responseValue);
+    cy.userLogout();
+  });
+});

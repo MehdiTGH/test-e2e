@@ -1,0 +1,9 @@
+{
+  "method": "PUT",
+  "urlRequest": "api/v1/registrations",
+  "nameRequest" : "registrationRequest",
+  "statusCodeWaiting" : 200,
+  "responseValue" : null,
+  "cookieSession" : "wttj_api_session_key",
+  "cookieToken" : "csrf-token"
+}
